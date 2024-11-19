@@ -3,9 +3,9 @@ from driver import driver
 def mancala_sim():
     suppress_output = True
     plies = 5
-    numGames = 10
+    numGames = 100
     p1type = 2
-    p2type = 3
+    p2type = 4
 
     p1wins = 0.
     p2wins = 0.

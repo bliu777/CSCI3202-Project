@@ -1,5 +1,6 @@
 from mancala import Mancala
 from minimax import minimax
+from ab_pruning import alpha_beta
 
 def driver(suppress_output, p1type, p2type, plies):
     '''
@@ -9,16 +10,18 @@ def driver(suppress_output, p1type, p2type, plies):
             suppress_output: Boolean value. Chooses if there should be console output or not.
                 True: There should be no output to console
                 False: Console output is wanted
-            p1type: Integer from 0-3, inclusive. Dictates the player type of Player 1.
+            p1type: Integer from 0-4, inclusive. Dictates the player type of Player 1.
                 0: Lets you select the player type of Player 1 from console. Should only be used if suppress_output=False.
                 1: Player 1 is a human player
                 2: Player 1 is a random player (makes a random legal move each turn)
-                3: Player 1 is an AI player (Minimax)
-            p2type: Integer from 0-3, inclusive. Dictates the player type of Player 2.
+                3: Player 1 is an AI player using Minimax
+                4: Player 1 is an AI player using Alpha-Beta Pruning
+            p2type: Integer from 0-4, inclusive. Dictates the player type of Player 2.
                 0: Lets you select the player type of Player 2 from console. Should only be used if suppress_output=False.
                 1: Player 2 is a human player
                 2: Player 2 is a random player (makes a random legal move each turn)
-                3: Player 2 is an AI player
+                3: Player 2 is an AI player using Minimax
+                4: Player 2 is an AI player using Alpha-Beta Pruning
             plies: Integer >0. Dictates the number of plies the AI game tree searches down. No effect if neither player is an AI.
 
         Outputs:
@@ -35,7 +38,8 @@ def driver(suppress_output, p1type, p2type, plies):
             print("What type of player should P1 be? Input a number.")
             print("     1. Human")
             print("     2. Random")
-            print("     3. AI")
+            print("     3. AI (Minimax)")
+            print("     4. AI (Alpha-Beta Pruning)")
 
             validInput = False
             while validInput == False:
@@ -49,6 +53,9 @@ def driver(suppress_output, p1type, p2type, plies):
                 elif consoleInput == "3":
                     p1type = 3
                     validInput = True
+                elif consoleInput == "4":
+                    p1type = 4
+                    validInput = True
                 else:
                     print("Invalid input, try again")
         
@@ -56,7 +63,8 @@ def driver(suppress_output, p1type, p2type, plies):
             print("What type of player should P2 be? Input a number.")
             print("     1. Human")
             print("     2. Random")
-            print("     3. AI")
+            print("     3. AI (Minimax)")
+            print("     4. AI (Alpha-Beta Pruning)")
 
             validInput = False
             while validInput == False:
@@ -69,6 +77,9 @@ def driver(suppress_output, p1type, p2type, plies):
                     validInput = True
                 elif consoleInput == "3":
                     p2type = 3
+                    validInput = True
+                elif consoleInput == "4":
+                    p2type = 4
                     validInput = True
                 else:
                     print("Invalid input, try again")
@@ -89,10 +100,14 @@ def driver(suppress_output, p1type, p2type, plies):
             elif p1type == 2:
                 #random player turn
                 game.random_move_generator(suppress_output)
-            else:
-                #AI player turn
+            elif p1type == 3:
+                #minimax player turn
                 minimaxMove = minimax(game, 5)
                 game.play(minimaxMove, True)
+            else:
+                #alpha-beta player turn
+                ab_move = alpha_beta(game, 5)
+                game.play(ab_move, True)
         else:
             if p2type == 1:
                 #player turn
@@ -100,10 +115,14 @@ def driver(suppress_output, p1type, p2type, plies):
             elif p2type == 2:
                 #random player turn
                 game.random_move_generator(suppress_output)
-            else:
-                #AI player turn
+            elif p2type == 3:
+                #minimax player turn
                 minimaxMove = minimax(game, 5)
                 game.play(minimaxMove, True)
+            else:
+                #alpha-beta player turn
+                ab_move = alpha_beta(game, 5)
+                game.play(ab_move, True)
         if suppress_output == False and (p1type != 1 or p2type != 1):
             game.display_board()
     p1_score = game.board[game.p1_mancala_index]

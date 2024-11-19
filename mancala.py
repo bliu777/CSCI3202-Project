@@ -59,7 +59,7 @@ class Mancala:
 
         #check if pit number is valid
         if pit < 1 or pit > self.pits_per_player:
-            return 1 #invalid move (invalid put number)
+            return 2 #invalid move (invalid pit number)
 
         #calculate offset for player 2
         if self.current_player == 1:
@@ -109,8 +109,8 @@ class Mancala:
         else:
             pit_index_offset = self.p1_mancala_index + 1
         #Check if the given move is valid
-        if self.valid_move(pit) == 1:
-            print("INVALID MOVE")
+        if self.valid_move(pit) != 0:
+            print("INVALID MOVE", self.valid_move(pit))
             return self.board
         #Output
         if suppress_output == False:
