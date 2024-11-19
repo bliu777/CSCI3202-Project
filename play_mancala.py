@@ -8,7 +8,9 @@ def mancala_sim():
     p1type = 2
     p2type = 4
 
-    if p1type == 1:
+    if p1type == 0:
+        p1typestring = "Variable"
+    elif p1type == 1:
         p1typestring = "Human"
     elif p1type == 2:
         p1typestring = "Random"
@@ -17,7 +19,9 @@ def mancala_sim():
     elif p1type == 4:
         p1typestring = "Alpha-Beta"
 
-    if p2type == 1:
+    if p2type == 0:
+        p2typestring = "Variable"
+    elif p2type == 1:
         p2typestring = "Human"
     elif p2type == 2:
         p2typestring = "Random"
