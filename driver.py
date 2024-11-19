@@ -139,7 +139,8 @@ def driver(suppress_output, p1type, p2type, plies):
         if suppress_output == False and (p1type != 1 or p2type != 1):
             print("Game Over! The game is a draw!")
         winner = 0
-    return winner
+    numMoves = len(game.moves)
+    return (winner, numMoves)
 
 
 def player_turn(game, suppress_output):
