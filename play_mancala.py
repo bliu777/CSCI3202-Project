@@ -3,10 +3,10 @@ import time
 
 def mancala_sim():
     suppress_output = True
-    plies = 5
+    plies = 10
     numGames = 100
-    p1type = 2
-    p2type = 4
+    p1type = 4
+    p2type = 2
 
     if p1type == 0:
         p1typestring = "Variable"
@@ -30,7 +30,7 @@ def mancala_sim():
     elif p2type == 4:
         p2typestring = "Alpha-Beta"
 
-    print("Now playing", numGames, "games of", p1typestring, "vs", p2typestring)
+    print("Now playing", numGames, "games of", p1typestring, "vs", p2typestring, "at a depth of", plies, "plies")
 
     totalTime = 0.
 

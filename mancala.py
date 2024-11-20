@@ -99,7 +99,7 @@ class Mancala:
         Finally, the function then switches the current player, allowing the other player to take their turn.
         """
         #Check if one player has won (the game is over)
-        if self.winning_eval() == 1:
+        if self.winning_eval() == True:
             if suppress_output == False:
                 print("GAME OVER")
             return self.board
@@ -110,7 +110,7 @@ class Mancala:
             pit_index_offset = self.p1_mancala_index + 1
         #Check if the given move is valid
         if self.valid_move(pit) != 0:
-            print("INVALID MOVE", self.valid_move(pit))
+            print("INVALID MOVE", self.valid_move(pit), pit)
             return self.board
         #Output
         if suppress_output == False:
@@ -156,10 +156,11 @@ class Mancala:
         p2_over = True
         for i in range(self.pits_per_player):
             if self.board[i] > 0:
+                #print(i, self.board[i])
                 p1_over = False
             if self.board[i + self.p1_mancala_index + 1] > 0:
+                #print(i + self.p1_mancala_index + 1, self.board[i + self.p1_mancala_index + 1])
                 p2_over = False
         if p1_over == True or p2_over == True:
             return True
-        else:
-            return False
+        return False

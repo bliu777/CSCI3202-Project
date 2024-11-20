@@ -93,6 +93,8 @@ def driver(suppress_output, p1type, p2type, plies):
     if suppress_output == False:
         game.display_board()
     while game.winning_eval() == False:
+        #print(game.winning_eval())
+        #game.display_board()
         if game.current_player == 1:
             if p1type == 1 :
                 #player turn
@@ -102,11 +104,11 @@ def driver(suppress_output, p1type, p2type, plies):
                 game.random_move_generator(suppress_output)
             elif p1type == 3:
                 #minimax player turn
-                minimaxMove = minimax(game, 5)
+                minimaxMove = minimax(game, plies)
                 game.play(minimaxMove, True)
             else:
                 #alpha-beta player turn
-                ab_move = alpha_beta(game, 5)
+                ab_move = alpha_beta(game, plies)
                 game.play(ab_move, True)
         else:
             if p2type == 1:
@@ -117,11 +119,11 @@ def driver(suppress_output, p1type, p2type, plies):
                 game.random_move_generator(suppress_output)
             elif p2type == 3:
                 #minimax player turn
-                minimaxMove = minimax(game, 5)
+                minimaxMove = minimax(game, plies)
                 game.play(minimaxMove, True)
             else:
                 #alpha-beta player turn
-                ab_move = alpha_beta(game, 5)
+                ab_move = alpha_beta(game, plies)
                 game.play(ab_move, True)
         if suppress_output == False and (p1type != 1 or p2type != 1):
             game.display_board()
